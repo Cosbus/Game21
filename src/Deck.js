@@ -7,7 +7,7 @@ class Deck {
     this.cards = []
   }
 
-  createCards () {
+  createFullSetOfCards () {
     let i = 0
     while (i < 52) {
       if (i < 13) {
@@ -21,6 +21,23 @@ class Deck {
       }
       i++
     }
+  }
+  /**
+   * Fisher-Yates shuffle algorithm, inspiration from stackoverflow.com
+   */
+  shuffleCards () {
+    for (let i = this.cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]]
+    }
+  }
+
+  dealCard () {
+    return this.cards.pop()
+  }
+
+  addCard (card) {
+    this.cards.push(card)
   }
 
   toString () {

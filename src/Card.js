@@ -3,6 +3,21 @@
 function Card (suit, value) {
   this._suit = suit
   this._value = value
+  this._setName()
+}
+
+Card.prototype._setName = function () {
+  if (this._value > 1 && this._value < 11) {
+    this._name = this._value
+  } else if (this._value === 1) {
+    this._name = 'A'
+  } else if (this._value === 11) {
+    this._name = 'J'
+  } else if (this._value === 12) {
+    this._name = 'Q'
+  } else if (this._value === 13) {
+    this._name = 'K'
+  }
 }
 
 Card.prototype.getSuit = function () {
@@ -22,17 +37,7 @@ Card.prototype.setValue = function (value) {
 }
 
 Card.prototype.toString = function () {
-  if (this._value === 1) {
-    return 'A' + this._suit
-  } else if (this._value < 11) {
-    return this._value + this._suit
-  } else if (this._value === 11) {
-    return 'J' + this._suit
-  } else if (this._value === 12) {
-    return 'Q' + this._suit
-  } else {
-    return 'K' + this._suit
-  }
+  return this._name + this._suit
 }
 
 module.exports = Card
