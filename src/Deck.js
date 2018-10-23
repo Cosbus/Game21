@@ -22,6 +22,7 @@ class Deck {
       i++
     }
   }
+
   /**
    * Fisher-Yates shuffle algorithm, inspiration from stackoverflow.com
    */
@@ -38,6 +39,10 @@ class Deck {
 
   addCard (card) {
     this.cards.push(card)
+  }
+
+  length () {
+    return this.cards.length
   }
 
   toString () {
