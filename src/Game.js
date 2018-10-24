@@ -1,11 +1,32 @@
+/**
+ * Module for Game.
+ *
+ * @module src/Game
+ * @author Claes Weyde
+ * @version 1.0.0
+ */
 'use strict'
 
-const Card = require('./Card')
 const Player = require('./Player')
 const Deck = require('./Deck')
 const Dealer = require('./Dealer')
 
+/**
+ * Represents a game
+ *
+ * @class Game
+ */
 class Game {
+
+  /**
+   * Creates an instance of Game.
+   *
+   * @param {number} [noOfPlayers=1] - the number of players in the game
+   * @param {number} [playerStop=17] - the value at which the players stop aquiring more cards
+   * @param {number} [dealerStop=18] - the value at which the dealer stops aquiring more cards
+   * @memberof Game
+   * @constructor
+   */
   constructor (noOfPlayers = 1, playerStop = 17, dealerStop = 18) {
     this._noOfPlayers = noOfPlayers
     this._players = []
@@ -22,6 +43,11 @@ class Game {
     this.runGame()
   }
 
+  /**
+   * Sets up the game
+   *
+   * @memberof Game
+   */
   setUpGame () {
     let i = 1
     while (i <= this._noOfPlayers) {
@@ -32,6 +58,11 @@ class Game {
     this._playDeck.shuffleCards()
   }
 
+  /**
+   * Starts the game and handles the different steps in the game
+   *
+   * @memberof Game
+   */
   runGame () {
     // Deal one card for each player initially
     for (let element in this._players) {
@@ -49,6 +80,13 @@ class Game {
     this.printStatistics()
   }
 
+  /**
+   * Plays a hand between a player and the dealer
+   *
+   * @param {Player} player - an instance of a player Object
+   * @param {Dealer} dealer - an instance of a dealer Object
+   * @memberof Game
+   */
   playHand (player, dealer) {
     while ((player.getPoints() < player.getPlayerStop()) && (player.getNoOfCards() < 5)) {
       this.deal(player)
@@ -93,12 +131,25 @@ class Game {
     }
   }
 
+  /**
+   * Throws all the player's cards to the throw deck
+   *
+   * @param {Player} player - instance of a player Object
+   * @memberof Game
+   */
   throwCards (player) {
     while (player.getNoOfCards() > 0) {
       this._throwDeck.addCard(player.throwCard())
     }
   }
 
+  /**
+   * Deals a card to a player, if the playDeck only have one card left it is thrown
+   * in the throwDeck and the throwDeck is reshuffled into the playDeck
+   *
+   * @param {Player} player - an instance of a player Object
+   * @memberof Game
+   */
   deal (player) {
     if (this._playDeck.length() < 2) {
       this._throwDeck.addCard(this._playDeck.dealCard())
@@ -112,6 +163,14 @@ class Game {
     } catch (error) { console.log(error.message) }
   }
 
+  /**
+   * Prints the result of the game between an instance of a player Object
+   * and an instance of a dealer object to the console.
+   *
+   * @param {Player} player - an instance of a player Object
+   * @param {Dealer} dealer - an instance of a dealer Object
+   * @memberof Game
+   */
   printResult (player, dealer) {
     let playerCards = player.getCards()
     let playerString = player.getName() + ': '
@@ -133,6 +192,12 @@ class Game {
     console.log(`${playerString}\n${dealerString}\n${this._winner.toString()} wins!\n`)
   }
 
+  /**
+   * Prints simple statistics regarding the win ratio for the players depending
+   * on the choosen stop values of the players and the dealer
+   *
+   * @memberof Game
+   */
   printStatistics () {
     console.log(`-------------------------------\nHere, using ${this._players.length} players, ${this._playerStop} as limit for the players and ${this._dealerStop}
 as limit for the dealer the players won ${Math.round((this._noOfPlayerWins / this._players.length) * 100)} % of the time.`)
