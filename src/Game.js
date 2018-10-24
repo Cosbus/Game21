@@ -117,7 +117,7 @@ class Game {
           this._winner = dealer.getName()
           this._noOfDealerWins++
         } else if (dealer.getPoints() === player.getPoints()) {
-          this._winner = 'Draw! No one'
+          this._winner = dealer.getName()
         } else {
           this._winner = player.getName()
           this._noOfPlayerWins++
