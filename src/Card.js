@@ -9,7 +9,7 @@ function Card (suit, value) {
 Card.prototype._setName = function () {
   if (this._value > 1 && this._value < 11) {
     this._name = this._value
-  } else if (this._value === 1) {
+  } else if (this._value === 1 || this._value === 14) {
     this._name = 'A'
   } else if (this._value === 11) {
     this._name = 'J'

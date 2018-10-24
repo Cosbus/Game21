@@ -3,8 +3,8 @@
 const Player = require('./Player')
 
 class Dealer extends Player {
-  constructor () {
-    super('Dealer')
+  constructor (name = 'Dealer', stop = 18) {
+    super(name, stop)
   }
 }
 

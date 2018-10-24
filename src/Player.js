@@ -3,13 +3,14 @@
 const Card = require('./Card')
 
 class Player {
-  constructor (name = 'Player') {
+  constructor (name = 'Player', playerStop = 17) {
     this._name = name
     this._cards = []
     this._points = 0
-    // Keep a flag for ace and a highPoints "soft" variable
+    this._playerStop = playerStop
+    // Keep a flag for ace and a soft value
     this._hasAce = false
-    this._highPoints = 13
+    this._highPoints = 0
   }
 
   /**
@@ -19,10 +20,14 @@ class Player {
    * @memberof Player
    */
   aquireCard (Card) {
+    if (Card.getValue() === undefined) throw new Error('No card to aquire')
     this._cards.push(Card)
     this._points += Card.getValue()
     this._highPoints += Card.getValue()
-    if (Card.getValue === 1) this._hasAce = true
+    if (Card.getValue() === 1 && !this._hasAce) {
+      this._hasAce = true
+      this._highPoints += 13
+    }
   }
 
   getName () {
@@ -41,21 +46,37 @@ class Player {
   }
 
   throwCard () {
-    this._points -= this._cards[this._cards.length - 1].getValue()
-    this._highPoints -= this._cards[this._cards.length - 1].getValue()
+    let value = this._cards[this._cards.length - 1].getValue()
+    this._points -= value
+    this._highPoints -= value
+    if (value === 1) {
+      this._highPoints -= 13
+    }
     return this._cards.pop()
   }
 
-  getPoint () {
+  getPoints () {
     return this._points
   }
 
-  getHighPoint () {
+  getHighPoints () {
     return this._highPoints
+  }
+
+  setPoints (value) {
+    this._points = value
   }
 
   getNoOfCards () {
     return this._cards.length
+  }
+
+  setPlayerStop (stop) {
+    this._playerStop = stop
+  }
+
+  getPlayerStop () {
+    return this._playerStop
   }
 
   hasAce () {
