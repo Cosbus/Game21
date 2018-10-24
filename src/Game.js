@@ -181,7 +181,7 @@ class Game {
     if (this._busted === 'player') playerString += 'BUSTED!'
 
     let dealerCards = dealer.getCards()
-    let dealerString = dealer.getName() + '   : '
+    let dealerString = dealer.getName() + ': '
     if (dealerCards.length === 0) {
       dealerString += '- '
     } else {
