@@ -9,7 +9,6 @@
 
 const Player = require('./Player')
 const Deck = require('./Deck')
-const Dealer = require('./Dealer')
 
 /**
  * Represents a game
@@ -30,7 +29,7 @@ class Game {
   constructor (noOfPlayers = 1, playerStop = 17, dealerStop = 18) {
     this._noOfPlayers = noOfPlayers
     this._players = []
-    this._dealer = new Dealer('Dealer', 18)
+    this._dealer = new Player('Dealer', 18)
     this._playDeck = new Deck()
     this._throwDeck = new Deck()
     this._playerStop = playerStop
