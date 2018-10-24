@@ -16,7 +16,6 @@ const Deck = require('./Deck')
  * @class Game
  */
 class Game {
-
   /**
    * Creates an instance of Game.
    *
