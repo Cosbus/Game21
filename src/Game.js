@@ -38,7 +38,6 @@ class Game {
     this._noOfDealerWins = 0
     this._noOfPlayerWins = 0
     this.setUpGame()
-    this.runGame()
   }
 
   /**
