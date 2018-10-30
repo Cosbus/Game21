@@ -155,9 +155,7 @@ class Game {
       }
       this._playDeck.shuffleCards()
     }
-    try {
-      player.aquireCard(this._playDeck.dealCard())
-    } catch (error) { console.log(error.message) }
+    player.aquireCard(this._playDeck.dealCard())
   }
 
   /**

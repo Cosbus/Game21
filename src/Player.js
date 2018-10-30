@@ -38,7 +38,7 @@ class Player {
    * @memberof Player
    */
   aquireCard (Card) {
-    if (Card.getValue() === undefined) throw new Error('No card to aquire')
+    if (Card == null) throw new TypeError('No card to aquire. Probably using too many players.')
     this._cards.push(Card)
     this._points += Card.getValue()
     this._highPoints += Card.getValue()

@@ -9,5 +9,10 @@
 
 const Game = require('./src/Game')
 
-let game = new Game(40)
-game.runGame()
+let game = new Game(40, 17, 18)
+
+try {
+  game.runGame()
+} catch (e) {
+  console.error(e.message)
+}
